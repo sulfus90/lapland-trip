@@ -187,7 +187,7 @@ main{padding-block:16px 8px}
 
 /* Plan / tips */
 .timeline{list-style:none;margin:0;padding:0;display:grid}
-.timeline li{display:grid;grid-template-columns:62px 1fr;gap:12px;padding:9px 0;border-top:1px solid var(--line)}
+.timeline li{display:grid;grid-template-columns:78px 1fr;gap:12px;padding:9px 0;border-top:1px solid var(--line)}
 .timeline li:first-child{border-top:0}
 .timeline .t{font-family:var(--f-mono);font-weight:700;font-size:13px;color:var(--aurora2);padding-top:1px}
 .tips{list-style:none;margin:0;padding:0;display:grid;gap:10px}
@@ -406,7 +406,11 @@ const store = {
   get(k, d){ try{ const v = localStorage.getItem(k); return v==null ? d : JSON.parse(v); }catch(e){ return d; } },
   set(k, v){ try{ localStorage.setItem(k, JSON.stringify(v)); }catch(e){} }
 };
-const fmtTime = (tz, d=new Date()) => new Intl.DateTimeFormat("en-GB",{timeZone:tz,hour:"2-digit",minute:"2-digit",hour12:false}).format(d);
+const fmt24 = (tz, d=new Date()) => new Intl.DateTimeFormat("en-GB",{timeZone:tz,hour:"2-digit",minute:"2-digit",hour12:false}).format(d);
+// Display times in 12-hour am/pm. t12 converts every HH:MM inside a string; h12 gives a compact hour label.
+const t12 = s => String(s).replace(/\b([01]?\d|2[0-3]):([0-5]\d)\b/g, (m,h,mm) => { h=+h; return `${h%12||12}:${mm} ${h<12?"am":"pm"}`; });
+const h12 = h => `${h%12||12}${h<12?"am":"pm"}`;
+const fmtTime = (tz, d=new Date()) => t12(fmt24(tz, d));
 const dateIn = (tz, d=new Date()) => new Intl.DateTimeFormat("en-CA",{timeZone:tz,year:"numeric",month:"2-digit",day:"2-digit"}).format(d);
 const niceDate = iso => new Date(iso+"T12:00:00Z").toLocaleDateString("en-GB",{weekday:"short",day:"numeric",month:"short",timeZone:"UTC"});
 const r0 = v => v==null||isNaN(v) ? "–" : Math.round(v);
@@ -552,7 +556,7 @@ function renderHeader(scroll=true){
   if(t<0){
     const ms = new Date("2026-11-21T19:00:00+08:00") - new Date();
     const days = Math.floor(ms/864e5), hrs = Math.floor(ms%864e5/36e5);
-    st = `<span class="pill glow">${days} days ${hrs} h to take-off</span><span class="pill">Assemble Changi T1 · 21 Nov 19:00</span>`;
+    st = `<span class="pill glow">${days} days ${hrs} h to take-off</span><span class="pill">Assemble Changi T1 · 21 Nov 7:00 pm</span>`;
   } else if(t<=12){
     st = `<span class="pill glow">Day ${t+1} of 13 · ${esc(DAYS[t].title)}</span>` + (DAYS[t].hunt?`<span class="pill">Aurora hunt #${DAYS[t].hunt} tonight</span>`:"");
   } else st = `<span class="pill glow">Welcome home! Trip complete</span>`;
@@ -675,7 +679,7 @@ function dayView(day){
   let html = `<section class="card hero" aria-labelledby="dayTitle">
     <div class="kicker">DAY ${day.n} · ${niceDate(day.date).toUpperCase()}</div>
     <h1 id="dayTitle">${esc(day.title)}</h1>
-    <p>${esc(day.blurb)}</p>
+    <p>${esc(t12(day.blurb))}</p>
     <div class="chips"><span class="tag ${i===t?"gold":""}">${rel}</span>${day.hunt?`<span class="tag aur">${icon("aurora","")} Aurora hunt #${day.hunt}</span>`:""}</div>
     <div class="facts">
       <div class="fact"><div class="k">Sleep</div><div class="v">${esc(day.hotel)}</div></div>
@@ -684,7 +688,7 @@ function dayView(day){
       <div class="fact"><div class="k">Time zone</div><div class="v">${tzs}</div></div>
     </div>
   </section>`;
-  if(day.n===12) html += `<div class="banner">${icon("alert","")}<div><b>Late-night flight.</b> AY131 departs 00:05 on 3 Dec, which is tonight. Be at Helsinki Airport by about 21:30.</div></div>`;
+  if(day.n===12) html += `<div class="banner">${icon("alert","")}<div><b>Late-night flight.</b> AY131 departs 12:05 am on 3 Dec, which is tonight. Be at Helsinki Airport by about 9:30 pm.</div></div>`;
   if(day.n===6) html += `<div class="banner">${icon("clock","")}<div><b>Clock change.</b> Finland is 1 hour ahead of Norway and Sweden. Move your watch forward when you cross the border.</div></div>`;
   html += weatherCard(day) + wearCard(day);
   if(day.hunt) html += auroraCard(day);
@@ -703,7 +707,7 @@ function weatherCard(day){
       <p class="src">${DATA ? "Live forecasts reach 16 days ahead. This day isn't covered yet, so the itinerary's seasonal range is shown." : "Live forecast not loaded yet. Showing the itinerary's seasonal range."}</p>`;
   } else {
     const isToday = dateIn(d.tz||dayTz(day)) === day.date;
-    const nowH = isToday ? +fmtTime(d.tz||dayTz(day)).slice(0,2) : null;
+    const nowH = isToday ? +fmt24(d.tz||dayTz(day)).slice(0,2) : null;
     const [a,b] = dayWindow(d); const s = windowStats(d, a, b); const all = windowStats(d,0,23);
     const night = isToday && (nowH < a || nowH > b);
     const H = d.hourly;
@@ -715,7 +719,7 @@ function weatherCard(day){
     const dl = d.daylight_duration ? d.daylight_duration/3600 : 0;
     const sr = minutes(d.sunrise), ss = minutes(d.sunset);
     body = `<div class="wx-top">${icon(ic,"wx-ico")}<div>
-        <div class="wx-big">${r0(bigT)}°<small>C ${isToday?`now · ${String(nowH).padStart(2,"0")}:00`:"high"}</small></div>
+        <div class="wx-big">${r0(bigT)}°<small>C ${isToday?`now · ${h12(nowH)}`:"high"}</small></div>
         <div class="wx-cond">${cond} · <span class="sub">High ${r0(d.temperature_2m_max)}° / Low ${r0(d.temperature_2m_min)}°</span></div></div></div>
       <div class="metrics">
         <div class="metric"><div class="k">Feels like</div><div class="v">${r0(bigF)}°<small>${isToday?"":" min"}</small></div></div>
@@ -726,7 +730,7 @@ function weatherCard(day){
       <div class="chart" aria-label="Hourly temperature and feels-like chart">${hourlyChart(d, nowH)}</div>
       <div class="daylight">
         <div class="dl-bar" title="Daylight">${sr!=null&&ss!=null&&ss>sr?`<span style="left:${sr/14.4}%;width:${(ss-sr)/14.4}%"></span>`:""}</div>
-        <div class="dl-meta"><span>Sunrise <b class="mono">${d.sunrise||"none"}</b></span><span><b>${dl? `${Math.floor(dl)} h ${Math.round(dl%1*60)} min` : "Polar night"}</b> of daylight</span><span>Sunset <b class="mono">${d.sunset||"none"}</b></span></div>
+        <div class="dl-meta"><span>Sunrise <b class="mono">${d.sunrise?t12(d.sunrise):"none"}</b></span><span><b>${dl? `${Math.floor(dl)} h ${Math.round(dl%1*60)} min` : "Polar night"}</b> of daylight</span><span>Sunset <b class="mono">${d.sunset?t12(d.sunset):"none"}</b></span></div>
       </div>
       <p class="src">Forecast for ${esc(LOCS[key].n)} (local time) · Open-Meteo, updated ${esc(DATA.updated.replace("T"," ").replace("Z"," UTC"))}${dataFromCache?" (saved copy, offline)":""}. Forecasts more than a week out can change a lot.</p>`;
   }
@@ -756,7 +760,7 @@ function hourlyChart(d, nowH){
   s+=`<path d="${path(T)}" fill="none" stroke="var(--berry)" stroke-width="2.6" stroke-linejoin="round"/>`;
   s+=`<path d="${path(F)}" fill="none" stroke="var(--aurora2)" stroke-width="2.2" stroke-dasharray="5 4" stroke-linejoin="round"/>`;
   if(nowH!=null){ s+=`<line x1="${x(nowH)}" x2="${x(nowH)}" y1="${padT}" y2="${Ht-padB}" stroke="var(--gold)" stroke-width="1.5"/><circle cx="${x(nowH)}" cy="${y(T[nowH])}" r="4.5" fill="var(--berry)" stroke="var(--card)" stroke-width="2"/>`; }
-  for(let h=0;h<24;h+=3) s+=`<text x="${x(h)}" y="${Ht-4}" text-anchor="middle" font-size="10.5" fill="var(--muted)" font-family="JetBrains Mono,monospace">${String(h).padStart(2,"0")}</text>`;
+  for(let h=0;h<24;h+=3) s+=`<text x="${x(h)}" y="${Ht-4}" text-anchor="middle" font-size="10.5" fill="var(--muted)" font-family="JetBrains Mono,monospace">${h12(h)}</text>`;
   s+=`<text x="${W-padR}" y="${padT-3}" text-anchor="end" font-size="11" fill="var(--muted)"><tspan fill="var(--berry)">━</tspan> temp  <tspan fill="var(--aurora2)">╍</tspan> feels like  <tspan fill="var(--aurora2)" opacity=".6">▮</tspan> chance of precip.  shaded = dark</text>`;
   return s+"</svg>";
 }
@@ -768,7 +772,7 @@ function wearCard(day){
   if(d){
     const [a,b]=dayWindow(d);
     s = state.wearMode==="night" ? windowStats(d,18,23) : windowStats(d,a,b);
-    src = `${state.wearMode==="night"?"18:00–23:00":`${String(a).padStart(2,"0")}:00–${String(b).padStart(2,"0")}:00`} in ${LOCS[key].n}: feels like ${r0(s.feelsMin)}° to ${r0(s.feelsMax)}°C`;
+    src = `${state.wearMode==="night"?"6pm–11pm":`${h12(a)}–${h12(b)}`} in ${LOCS[key].n}: feels like ${r0(s.feelsMin)}° to ${r0(s.feelsMax)}°C`;
   } else {
     const lo = day.season.lo - (state.wearMode==="night"?4:0);
     s = {feelsMin: lo-3, feelsMax: day.season.hi, tMin: lo, tMax: day.season.hi, wind:0, pop:0, snow:0, wet:/rain|wet|sleet|shower/i.test(day.season.t), snowy:/snow/i.test(day.season.t)};
@@ -790,13 +794,13 @@ function auroraCard(day){
   const C = 2*Math.PI*48;
   const gauge = `<div class="gauge"><svg viewBox="0 0 120 120"><circle cx="60" cy="60" r="48" fill="none" stroke="var(--line)" stroke-width="11"/><circle cx="60" cy="60" r="48" fill="none" stroke="${a.col}" stroke-width="11" stroke-linecap="round" stroke-dasharray="${C*pct} ${C}" transform="rotate(-90 60 60)"/></svg><div class="g-txt"><b style="color:${a.col}">${a.label}</b><span>tonight</span></div></div>`;
   const kpTxt = a.kp==null ? "–" : a.kp;
-  const hours = a.hrs ? `<div class="hours" aria-label="Cloud cover by hour">${a.hrs.map(x=>{const c=x.c??100; return `<div class="hr"><i style="background:color-mix(in srgb,var(--sky1) ${Math.round(100-c)}%,#B9C6DA ${Math.round(c)}%)" title="${c}% cloud"></i>${String(x.h).padStart(2,"0")}</div>`;}).join("")}</div><p class="src" style="margin-top:4px">Dark tiles = clear sky, pale tiles = cloud. ${a.best?`Clearest hour: <b>${String(a.best.h).padStart(2,"0")}:00</b> (${a.best.c}% cloud).`:""}</p>` : "";
+  const hours = a.hrs ? `<div class="hours" aria-label="Cloud cover by hour">${a.hrs.map(x=>{const c=x.c??100; return `<div class="hr"><i style="background:color-mix(in srgb,var(--sky1) ${Math.round(100-c)}%,#B9C6DA ${Math.round(c)}%)" title="${c}% cloud"></i>${h12(x.h)}</div>`;}).join("")}</div><p class="src" style="margin-top:4px">Dark tiles = clear sky, pale tiles = cloud. ${a.best?`Clearest hour: <b>${h12(a.best.h)}</b> (${a.best.c}% cloud).`:""}</p>` : "";
   return `<section class="card"><div class="sec-head"><h2>${icon("aurora")} Aurora outlook · hunt #${day.hunt}</h2><span class="sub">near ${esc(LOCS[a.key].n)}</span></div>
     <div class="aur-grid">${gauge}
       <div class="bars">
         <div class="bar-row"><div class="lbl">Solar activity (Kp) <span>${kpTxt} of 9</span></div><div class="track"><span style="width:${a.kp==null?0:a.kp/9*100}%"></span></div></div>
-        <div class="bar-row"><div class="lbl">Clear sky 17:00–02:00 <span>${a.clear==null?"–":Math.round(a.clear*100)+"%"}</span></div><div class="track"><span style="width:${a.clear==null?0:a.clear*100}%"></span></div></div>
-        <p class="sub" style="margin:0">At about 66–70°N you are under the auroral oval, so even Kp 2–3 can light up the sky. Clouds matter more than Kp. Best viewing is usually 21:00–01:00.</p>
+        <div class="bar-row"><div class="lbl">Clear sky 5pm–2am <span>${a.clear==null?"–":Math.round(a.clear*100)+"%"}</span></div><div class="track"><span style="width:${a.clear==null?0:a.clear*100}%"></span></div></div>
+        <p class="sub" style="margin:0">At about 66–70°N you are under the auroral oval, so even Kp 2–3 can light up the sky. Clouds matter more than Kp. Best viewing is usually 9pm–1am.</p>
       </div></div>${hours}
     <p class="src">Kp: NOAA SWPC 27-day outlook (issued ${esc(DATA&&DATA.aurora&&DATA.aurora.issued||"–")}); long-range Kp is a rough guide. Check again on the day, and remember sightings are never guaranteed.</p>
   </section>`;
@@ -817,10 +821,10 @@ function mapCard(day){
 
 function planCard(day){
   return `<section class="card"><div class="sec-head"><h2>${icon("list")} Plan</h2><span class="sub">Times as printed; confirm with your tour manager</span></div>
-    <ul class="timeline">${day.plan.map(([t,s])=>`<li><span class="t">${esc(t)}</span><span>${esc(s)}</span></li>`).join("")}</ul>
+    <ul class="timeline">${day.plan.map(([t,s])=>`<li><span class="t">${esc(t12(t))}</span><span>${esc(t12(s))}</span></li>`).join("")}</ul>
   </section>
   <section class="card"><div class="sec-head"><h2>${icon("star")} Good to know</h2></div>
-    <ul class="tips">${day.tips.map(t=>`<li>${icon("star","")}<span>${esc(t)}</span></li>`).join("")}</ul>
+    <ul class="tips">${day.tips.map(t=>`<li>${icon("star","")}<span>${esc(t12(t))}</span></li>`).join("")}</ul>
   </section>`;
 }
 
@@ -828,7 +832,7 @@ function notesCard(day){
   const v = store.get("lap.note."+day.n, "");
   return `<section class="card"><div class="sec-head"><h2>${icon("pen")} My notes</h2><span class="sub">Saved on this device only</span></div>
     <label for="note" class="sub" style="display:block;margin-bottom:6px">Meeting times, room number, highlights, did you see the aurora?</label>
-    <textarea id="note" data-n="${day.n}" placeholder="e.g. Coach leaves 08:30 from lobby · Room 512 · Green aurora at 22:40!">${esc(v)}</textarea><div class="saved" id="saved"></div>
+    <textarea id="note" data-n="${day.n}" placeholder="e.g. Coach leaves 8:30 am from lobby · Room 512 · Green aurora at 10:40 pm!">${esc(v)}</textarea><div class="saved" id="saved"></div>
   </section>`;
 }
 
@@ -838,18 +842,18 @@ function flightsView(){
   const next = FLIGHTS.find(f => when(f) > now);
   let cd = "";
   if(next){ const ms = when(next)-now, dd=Math.floor(ms/864e5), hh=Math.floor(ms%864e5/36e5), mm=Math.floor(ms%36e5/6e4);
-    cd = `<section class="card"><div class="sub">Next flight · ${next.no} ${next.from} → ${next.to}</div><div class="count mono">${dd>0?dd+"d ":""}${hh}h ${mm}m</div><div class="sub">Departs ${niceDate(next.d)} at ${next.dep} local time</div></section>`; }
+    cd = `<section class="card"><div class="sub">Next flight · ${next.no} ${next.from} → ${next.to}</div><div class="count mono">${dd>0?dd+"d ":""}${hh}h ${mm}m</div><div class="sub">Departs ${niceDate(next.d)} at ${t12(next.dep)} local time</div></section>`; }
   const plane = '<svg viewBox="0 0 56 20" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M2 10h52" stroke-dasharray="3 3"/><path d="M30 10l-4-6h2.5l6 6-6 6H26l4-6Z" fill="currentColor" stroke="none"/></svg>';
   const rows = FLIGHTS.map(f=>`<div class="pass">
-      <div><div class="ap">${f.from}</div><div class="city">${f.fc}</div><div class="tm">${f.dep}</div></div>
+      <div><div class="ap">${f.from}</div><div class="city">${f.fc}</div><div class="tm">${t12(f.dep)}</div></div>
       <div class="mid">${f.dur}${plane}${f.no}</div>
-      <div class="r"><div class="ap">${f.to}</div><div class="city">${f.tc}</div><div class="tm">${f.arr}${f.plus?" <small>+1</small>":""}</div></div>
+      <div class="r"><div class="ap">${f.to}</div><div class="city">${f.tc}</div><div class="tm">${t12(f.arr)}${f.plus?" <small>+1</small>":""}</div></div>
       <div class="flt-meta"><span class="tag">${niceDate(f.d)}</span><span class="sub">Finnair · local times</span></div></div>`).join("");
   return cd + `<section class="card"><div class="sec-head"><h2>${icon("clock")} Flights</h2><span class="sub">Times as printed; confirm in the Finnair app</span></div>${rows}</section>
   <section class="card"><h2>${icon("star")} Airport notes</h2><ul class="tips" style="margin-top:10px">
-    <li>${icon("star","")}<span>Helsinki on 22 Nov: you arrive at 05:45 and the Tromsø flight leaves at 07:35. You clear Schengen passport control here, so head straight for the transfer signs.</span></li>
+    <li>${icon("star","")}<span>Helsinki on 22 Nov: you arrive at 5:45 am and the Tromsø flight leaves at 7:35 am. You clear Schengen passport control here, so head straight for the transfer signs.</span></li>
     <li>${icon("star","")}<span>Power banks and lithium batteries must be in cabin baggage on every flight.</span></li>
-    <li>${icon("star","")}<span>AY131 home leaves at 00:05 on 3 Dec, just after midnight on the night of 2 Dec. Don't turn up a day late!</span></li>
+    <li>${icon("star","")}<span>AY131 home leaves at 12:05 am on 3 Dec, just after midnight on the night of 2 Dec. Don't turn up a day late!</span></li>
     <li>${icon("star","")}<span>VAT refund: get forms validated at Helsinki Airport before checking in bags that hold the goods.</span></li>
   </ul></section>`;
 }
