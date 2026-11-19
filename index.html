@@ -289,7 +289,7 @@ const DAYS = [
  {n:1,date:"2026-11-21",title:"Singapore → Helsinki",cc:["SG"],wx:["sin"],map:"world",
   blurb:"Assemble at Changi T1 at 19:00, then the overnight Finnair flight to Helsinki.",
   season:{t:"Singapore 25–31°C, humid. Bring a light layer for the cabin.",lo:25,hi:31},
-  hotel:"Overnight on AY132",acts:["flight"],
+  hotel:"Overnight on AY132",meals:"On board",acts:["flight"],
   stops:[{k:"a",n:"Changi Airport T1",ll:[1.3615,103.9894],q:"Changi Airport Terminal 1"},{k:"a",n:"Helsinki Airport (HEL)",ll:[60.3172,24.9633],q:"Helsinki Airport"}],
   routes:[{t:"flight",pts:[[1.3615,103.9894],[60.3172,24.9633]]}],
   plan:[["19:00","Assemble at Changi Terminal 1 with the tour manager"],["22:05","AY132 departs for Helsinki (about 13 h)"],["05:45","Arrive Helsinki, 22 Nov (local time)"]],
@@ -297,23 +297,23 @@ const DAYS = [
  {n:2,date:"2026-11-22",title:"Helsinki → Tromsø",cc:["NO"],wx:["tro"],hunt:1,
   blurb:"Fly north to Tromsø, walk the Arctic city, then a King Crab Safari with a seafood feast. First aurora hunt on foot with the tour manager.",
   season:{t:"Tromsø about −2 to +2°C; wet, windy or mixed. Daylight about 3–4 h.",lo:-2,hi:2},
-  hotel:"Thon Hotel Tromsø or similar",acts:["boat","walk","night"],
+  hotel:"Thon Hotel Tromsø or similar",meals:"Dinner (seafood feast)",acts:["boat","walk","night"],
   stops:[{k:"a",n:"Helsinki Airport (HEL)",ll:[60.3172,24.9633],q:"Helsinki Airport",far:1},{k:"a",n:"Tromsø Airport (TOS)",ll:[69.6833,18.9189],q:"Tromsø Airport"},{k:"s",n:"Tromsø centre walking tour",ll:[69.6496,18.9560],q:"Storgata Tromsø"},{k:"s",n:"Arctic Cathedral",ll:[69.6481,18.9873],q:"Arctic Cathedral Tromsø"},{k:"s",n:"King Crab Safari",ll:[69.67,19.05],ap:1,note:"Meeting point given on the day"},{k:"h",n:"Thon Hotel Tromsø",ll:[69.6487,18.9535],q:"Thon Hotel Tromsø"}],
   routes:[{t:"flight",pts:[[60.3172,24.9633],[69.6833,18.9189]]},{t:"road",pts:[[69.6833,18.9189],[69.6496,18.956]]}],
   plan:[["07:35","AY935 Helsinki → Tromsø (arrive 08:35)"],["Day","Tromsø walking tour"],["Day","King Crab Safari and seafood feast"],["Night","Aurora hunt #1, short walk with the tour manager"]],
   tips:["Daylight is short: sunrise is around 10:15 and sunset around 12:45. Do your photos of the Arctic Cathedral and the bridge in that window.","On the crab safari you get a thermal suit, but wear your base layer underneath. Wet hands get cold fast, so bring a spare pair of gloves.","Norway is almost cashless. Tap your card or phone everywhere, even for small purchases.","Clocks: Norway is UTC+1, which is 7 h behind Singapore."]},
  {n:3,date:"2026-11-23",title:"Tromsø → Svolvær",cc:["NO"],wx:["tro","svo"],hunt:2,
-  blurb:"A long scenic drive through the Norwegian fjords to Svolvær, the capital of Lofoten. Aurora hunt #2.",
+  blurb:"A snowmobile safari in the winter landscape (weather permitting), then a long scenic drive through the Norwegian fjords to Svolvær, the capital of Lofoten. Aurora hunt #2.",
   season:{t:"Lofoten about +1 to +6°C; showers or sleet possible. Very short daylight.",lo:1,hi:6},
-  hotel:"Thon Hotel Svolvær or similar",acts:["coach","night"],
+  hotel:"Thon Hotel Svolvær or similar",meals:"Breakfast",acts:["snowmobile","coach","night"],
   stops:[{k:"h",n:"Tromsø (depart)",ll:[69.6487,18.9535],q:"Tromsø"},{k:"s",n:"Nordkjosbotn",ll:[69.217,19.55],q:"Nordkjosbotn"},{k:"s",n:"Bjerkvik",ll:[68.548,17.56],q:"Bjerkvik"},{k:"s",n:"Gullesfjordbotn",ll:[68.53,15.72],q:"Gullesfjordbotn"},{k:"h",n:"Thon Hotel Svolvær",ll:[68.2335,14.5694],q:"Thon Hotel Svolvær"}],
   routes:[{t:"road",pts:[[69.6487,18.9535],[69.45,19.2],[69.217,19.55],[69.05,19.0],[68.861,18.348],[68.548,17.56],[68.56,17.0],[68.53,16.5],[68.6,16.1],[68.53,15.72],[68.45,15.2],[68.42,14.8],[68.3,14.65],[68.2335,14.5694]]}],
-  plan:[["Day","Scenic drive through the fjords (about 7–8 h with stops, route approximate)"],["Night","Aurora hunt #2 around Svolvær"]],
-  tips:["Winding coastal roads: take motion-sickness tablets before you board if you need them.","Keep snacks, water and a power bank in your day bag. Stops can be far apart.","When the coach stops for photos, the roadside is icy. Ice grips on your boots make a big difference.","Lofoten has no light pollution outside the villages, so the hunt here can be excellent if the sky clears."]},
+  plan:[["Morning","Snowmobile safari around Tromsø (if weather permits)"],["Day","Scenic drive through the fjords (about 7–8 h with stops, route approximate)"],["Night","Aurora hunt #2 around Svolvær"]],
+  tips:["If there isn't enough snow for the snowmobile safari, the group gets an extra meal instead.","Dinner isn't included tonight (or on days 4 and 5), so plan to eat in Svolvær.","Winding coastal roads: take motion-sickness tablets before you board if you need them.","Keep snacks, water and a power bank in your day bag. Stops can be far apart.","When the coach stops for photos, the roadside is icy. Ice grips on your boots make a big difference.","Lofoten has no light pollution outside the villages, so the hunt here can be excellent if the sky clears."]},
  {n:4,date:"2026-11-24",title:"Lofoten Islands",cc:["NO"],wx:["svo","rei"],hunt:3,
   blurb:"The postcard day: Reine fishing village and Henningsvær, with red rorbu cabins, cod-drying racks and peaks rising out of the sea. Aurora hunt #3.",
   season:{t:"Lofoten about +1 to +6°C; coastal wind and rain or snow possible.",lo:1,hi:6},
-  hotel:"Thon Hotel Svolvær or similar",acts:["coach","walk","night"],
+  hotel:"Thon Hotel Svolvær or similar",meals:"Breakfast",acts:["coach","walk","night"],
   stops:[{k:"h",n:"Svolvær",ll:[68.2335,14.5694],q:"Svolvær"},{k:"s",n:"Henningsvær",ll:[68.1531,14.2047],q:"Henningsvær"},{k:"s",n:"Hamnøy bridge viewpoint",ll:[67.9465,13.1305],q:"Hamnøy"},{k:"s",n:"Reine",ll:[67.9325,13.0889],q:"Reine Lofoten"},{k:"h",n:"Thon Hotel Svolvær",ll:[68.2335,14.5694],q:"Thon Hotel Svolvær"}],
   routes:[{t:"road",pts:[[68.2335,14.5694],[68.19,14.4],[68.1531,14.2047]]},{t:"road",pts:[[68.19,14.4],[68.147,13.611],[68.09,13.38],[68.0,13.25],[67.9465,13.1305],[67.9325,13.0889]]}],
   plan:[["Day","Henningsvær, the fishing village spread over small islands"],["Day","Reine and the Hamnøy viewpoints"],["Night","Aurora hunt #3"]],
@@ -321,7 +321,7 @@ const DAYS = [
  {n:5,date:"2026-11-25",title:"Lofoten → Narvik",cc:["NO"],wx:["svo","nar"],hunt:4,
   blurb:"Optional 1.5–2 h RIB sea-eagle safari, then a scenic fjord drive to Narvik. Possible aurora from the hotel sky bar.",
   season:{t:"Narvik around −3 to +3°C; snow or rain possible. Dress for wind.",lo:-3,hi:3},
-  hotel:"Scandic Narvik or similar",acts:["boat","coach","night"],
+  hotel:"Scandic Narvik or similar",meals:"Breakfast",acts:["boat","coach","night"],
   stops:[{k:"h",n:"Svolvær",ll:[68.2335,14.5694],q:"Svolvær"},{k:"s",n:"Sea-eagle RIB safari (optional)",ll:[68.36,14.96],ap:1,note:"Trollfjord area, from Svolvær harbour"},{k:"h",n:"Scandic Narvik",ll:[68.4377,17.4246],q:"Scandic Narvik"}],
   routes:[{t:"ferry",pts:[[68.2335,14.5694],[68.3,14.8],[68.36,14.96]]},{t:"road",pts:[[68.2335,14.5694],[68.3,14.65],[68.42,14.8],[68.45,15.2],[68.53,15.72],[68.6,16.1],[68.53,16.5],[68.56,17.0],[68.548,17.56],[68.47,17.5],[68.4377,17.4246]]}],
   plan:[["Morning","Optional RIB sea-eagle safari (1.5–2 h)"],["Day","Fjord drive to Narvik"],["Night","Aurora hunt #4, possibly from the hotel sky bar"]],
@@ -329,39 +329,39 @@ const DAYS = [
  {n:6,date:"2026-11-26",title:"Narvik → Sweden → Lapland",cc:["NO","SE"],wx:["nar","abi","kan"],hunt:5,
   blurb:"The Arctic Circle Train climbs from Narvik's fjord over the mountains into Swedish Lapland, then on towards Finland. Aurora hunt #5 on your own near the glass cabin.",
   season:{t:"Lapland roughly −10 to −2°C; snow or ice possible. Daylight about 3–5 h.",lo:-10,hi:-2},
-  hotel:"Lapland View Lodge or similar",acts:["train","coach","night"],
+  hotel:"Lapland View Lodge or similar",meals:"Breakfast, dinner",acts:["train","coach","night"],
   stops:[{k:"h",n:"Narvik station",ll:[68.4408,17.4312],q:"Narvik stasjon"},{k:"s",n:"Riksgränsen (border)",ll:[68.4256,18.1281],q:"Riksgränsen"},{k:"s",n:"Abisko",ll:[68.3495,18.8312],q:"Abisko"},{k:"s",n:"Kiruna",ll:[67.8558,20.2253],q:"Kiruna"},{k:"h",n:"Lapland View Lodge",ll:[67.47,22.26],ap:1,note:"Listed in the Kangos area, Sweden. Confirm with your tour manager"}],
   routes:[{t:"train",pts:[[68.4408,17.4312],[68.42,17.75],[68.4256,18.1281],[68.39,18.5],[68.3495,18.8312],[68.2,19.4],[67.98,19.95],[67.8558,20.2253]]},{t:"road",pts:[[67.8558,20.2253],[67.65,21.0],[67.47,22.26]]}],
-  plan:[["Day","Arctic Circle Train (Ofoten line) Narvik → Sweden"],["Day","Continue by road through Swedish Lapland"],["Night","Aurora hunt #5, independently"]],
+  plan:[["Day","Arctic Circle Train (Ofoten line) Narvik → Sweden. Departure time depends on the train schedule"],["Day","Continue by road through Swedish Lapland"],["Night","Aurora hunt #5, independently"]],
   tips:["The first hour out of Narvik is the most scenic stretch: the line clings to the mountainside above the Rombaken fjord. Have your camera ready.","Abisko sits in a rain shadow and is one of the clearest aurora spots in Scandinavia.","Currency changes to Swedish krona (SEK), and cards still work everywhere.","When you cross into Finland, clocks move forward 1 hour (UTC+2)."]},
  {n:7,date:"2026-11-27",title:"Finnish Lapland",cc:["SE","FI"],wx:["kan","cab"],hunt:6,
   blurb:"Meet the huskies: learn about the dogs, their habitat and character. Aurora hunt #6 on your own near the glass cabin.",
   season:{t:"Lapland roughly −10 to −3°C; snow likely but not guaranteed. Layer up.",lo:-10,hi:-3},
-  hotel:"AC Aurora Glass Cabin or similar",acts:["husky","night"],
+  hotel:"AC Aurora Glass Cabin or similar",meals:"Breakfast, dinner",acts:["husky","night"],
   stops:[{k:"h",n:"Lapland View Lodge",ll:[67.47,22.26],ap:1},{k:"s",n:"Pello (Swedish–Finnish border)",ll:[66.775,23.96],q:"Pello"},{k:"s",n:"Husky dog farm",ll:[66.62,24.6],ap:1,note:"Exact farm given on the day"},{k:"h",n:"AC Aurora Glass Cabin",ll:[66.55,25.2],ap:1,note:"Location to confirm"}],
   routes:[{t:"road",pts:[[67.47,22.26],[67.2,23.0],[66.775,23.96],[66.62,24.6],[66.55,25.2]]}],
   plan:[["Day","Husky farm visit"],["Night","Aurora hunt #6 from the glass cabin area"]],
-  tips:["Ask before petting a husky and never feed them. They're working dogs on a strict diet.","Huskies kick up snow: ski goggles or sunglasses and a buff over your face help a lot.","In the glass cabin, turn every light off, let your eyes adjust for about 15 minutes, and set an alarm for midnight to check the sky."]},
+  tips:["Extra warm clothing is provided at the farm if it's very cold.","If there isn't enough snow, a husky sledge ride becomes a husky cart ride or a shorter run.","Ask before petting a husky and never feed them. They're working dogs on a strict diet.","Huskies kick up snow: ski goggles or sunglasses and a buff over your face help a lot.","In the glass cabin, turn every light off, let your eyes adjust for about 15 minutes, and set an alarm for midnight to check the sky."]},
  {n:8,date:"2026-11-28",title:"Winter experiences",cc:["FI"],wx:["rov","suo"],hunt:7,
-  blurb:"Horse-sleigh ride at an authentic horse farm, then Santa Claus Village on the Arctic Circle: meet Santa and send a postcard from his Main Post Office. Aurora hunt #7.",
+  blurb:"Horse-sleigh ride at an authentic horse farm, then Santa Claus Village on the Arctic Circle: meet Santa, send a postcard from his Main Post Office and collect your Arctic Circle Certificate. Aurora hunt #7.",
   season:{t:"Lapland about −10 to −3°C; short daylight, icy paths.",lo:-10,hi:-3},
-  hotel:"Suomutunturi Hotel or similar",acts:["sleigh","walk","night"],
+  hotel:"Suomutunturi Hotel or similar",meals:"Breakfast, Chinese lunch, dinner",acts:["sleigh","walk","night"],
   stops:[{k:"s",n:"Horse farm & sleigh ride",ll:[66.6,25.5],ap:1,note:"Farm given on the day"},{k:"s",n:"Santa Claus Village",ll:[66.5436,25.8473],q:"Santa Claus Village Rovaniemi"},{k:"s",n:"Santa's Main Post Office",ll:[66.5433,25.8460],q:"Santa Claus Main Post Office"},{k:"h",n:"Suomutunturi Hotel",ll:[66.78,27.53],ap:1,q:"Hotel Suomutunturi"}],
   routes:[{t:"road",pts:[[66.6,25.5],[66.5436,25.8473]]},{t:"road",pts:[[66.5436,25.8473],[66.62,26.4],[66.71,27.0],[66.78,27.53]]}],
-  plan:[["Day","Horse farm and traditional horse-sleigh ride"],["Day","Santa Claus Village: photo with Santa, postcard from the Main Post Office"],["Optional","Arctic Circle Certificate (€35–€60)"],["Night","Aurora hunt #7"]],
+  plan:[["Day","Horse farm and traditional horse-sleigh ride"],["Day","Santa Claus Village: meet Santa, postcard from the Main Post Office"],["Day","Collect your Arctic Circle Certificate (your name and the date)"],["Optional","Buy the photo with Santa (€35–€60, own expense)"],["Night","Aurora hunt #7"]],
   tips:["Step over the painted Arctic Circle line (66°33′N) for the classic photo.","Postcards from Santa's Main Post Office get a special Arctic Circle postmark. You can also schedule a card to arrive at Christmas.","On the sleigh, sit on your hands now and then. A blanket is usually provided, but toes get coldest, so wear your warmest socks today."]},
  {n:9,date:"2026-11-29",title:"Ranua & reindeer farm",cc:["FI"],wx:["ran","syo"],hunt:8,
   blurb:"Ranua Wildlife Park, home to Arctic animals including polar bears, then a reindeer farm where you feed the reindeer by hand. Final aurora hunt with the tour manager.",
   season:{t:"Ranua/Lapland roughly −10 to −3°C; snow or overcast possible.",lo:-10,hi:-3},
-  hotel:"Kide Hotel or similar",acts:["walk","night"],
+  hotel:"Kide Hotel or similar",meals:"Breakfast, lunch",acts:["walk","night"],
   stops:[{k:"h",n:"Suomutunturi",ll:[66.78,27.53],ap:1},{k:"s",n:"Ranua Wildlife Park",ll:[65.9235,26.5106],q:"Ranua Wildlife Park"},{k:"s",n:"Reindeer farm",ll:[65.85,26.9],ap:1,note:"Farm given on the day"},{k:"h",n:"KIDE Hotel by Iso-Syöte",ll:[65.6177,27.5768],q:"KIDE hotel by Iso-Syöte"}],
   routes:[{t:"road",pts:[[66.78,27.53],[66.45,27.1],[66.15,26.75],[65.9235,26.5106]]},{t:"road",pts:[[65.9235,26.5106],[65.85,26.9],[65.72,27.3],[65.6177,27.5768]]}],
   plan:[["Day","Ranua Wildlife Park, about 50 Arctic species"],["Day","Reindeer farm: learn about reindeer and feed them"],["Night","Aurora hunt #8 with the tour manager, the last one"]],
-  tips:["Ranua's paths are long and outdoors. Keep moving between enclosures to stay warm, and use the café to warm up.","Brown bears may be hibernating in late November. The polar bears are the stars this time of year.","Hold lichen on a flat, open palm for the reindeer. Their antlers swing, so stand to the side."]},
+  tips:["Lunch is included today but dinner isn't.","Ranua's paths are long and outdoors. Keep moving between enclosures to stay warm, and use the café to warm up.","Brown bears may be hibernating in late November. The polar bears are the stars this time of year.","Hold lichen on a flat, open palm for the reindeer. Their antlers swing, so stand to the side."]},
  {n:10,date:"2026-11-30",title:"Oulu → Helsinki",cc:["FI"],wx:["oul","hel"],
   blurb:"Transfer to Oulu airport and fly south to Helsinki, then on to the hotel.",
   season:{t:"Oulu about −8 to 0°C; Helsinki about −5 to +3°C. Daylight about 5–6 h.",lo:-8,hi:3},
-  hotel:"Clarion Hotel Aviapolis or similar",acts:["flight"],
+  hotel:"Clarion Hotel Aviapolis or similar",meals:"Breakfast",acts:["flight"],
   stops:[{k:"h",n:"KIDE Hotel Iso-Syöte",ll:[65.6177,27.5768]},{k:"a",n:"Oulu Airport (OUL)",ll:[64.9301,25.3546],q:"Oulu Airport"},{k:"a",n:"Helsinki Airport (HEL)",ll:[60.3172,24.9633],q:"Helsinki Airport"},{k:"h",n:"Clarion Hotel Aviapolis",ll:[60.2938,24.9669],q:"Clarion Hotel Aviapolis"}],
   routes:[{t:"road",pts:[[65.6177,27.5768],[65.4,26.8],[65.1,25.8],[64.9301,25.3546]]},{t:"flight",pts:[[64.9301,25.3546],[60.3172,24.9633]]},{t:"road",pts:[[60.3172,24.9633],[60.2938,24.9669]]}],
   plan:[["Morning","Transfer to Oulu airport"],["14:20","AY438 Oulu → Helsinki (arrive 15:20)"],["Afternoon","Transfer to Clarion Hotel Aviapolis"]],
@@ -369,7 +369,7 @@ const DAYS = [
  {n:11,date:"2026-12-01",title:"Helsinki",cc:["FI"],wx:["hel"],
   blurb:"Helsinki city tour, then free time for sightseeing and shopping.",
   season:{t:"Helsinki around −5 to +3°C; cloud, rain or snow possible.",lo:-5,hi:3},
-  hotel:"Clarion Hotel Aviapolis or similar",acts:["walk","city"],
+  hotel:"Clarion Hotel Aviapolis or similar",meals:"Breakfast, lunch",acts:["walk","city"],
   stops:[{k:"s",n:"Senate Square & Helsinki Cathedral",ll:[60.1695,24.9522],q:"Helsinki Cathedral"},{k:"s",n:"Uspenski Cathedral",ll:[60.1684,24.9600],q:"Uspenski Cathedral"},{k:"s",n:"Market Square & Old Market Hall",ll:[60.1670,24.9530],q:"Old Market Hall Helsinki"},{k:"s",n:"Esplanadi & Stockmann",ll:[60.1679,24.9440],q:"Esplanadi Helsinki"},{k:"s",n:"Temppeliaukio Rock Church",ll:[60.1730,24.9251],q:"Temppeliaukio Church"},{k:"s",n:"Sibelius Monument",ll:[60.1823,24.9132],q:"Sibelius Monument"}],
   routes:[{t:"road",pts:[[60.1823,24.9132],[60.173,24.9251],[60.1679,24.944],[60.1695,24.9522],[60.1684,24.96],[60.167,24.953]]}],
   plan:[["Day","Helsinki city tour"],["Afternoon","Free time for sightseeing and shopping"]],
@@ -377,7 +377,7 @@ const DAYS = [
  {n:12,date:"2026-12-02",title:"Helsinki / optional Tallinn",cc:["FI","EE"],wx:["hel","tal"],
   blurb:"Free until the 12:00 checkout. Optional Tallinn UNESCO Old Town excursion with a meal, subject to tour arrangements. Late-night transfer to the airport.",
   season:{t:"Helsinki/Tallinn roughly −5 to +4°C; cold, damp and windy.",lo:-5,hi:4},
-  hotel:"No overnight. Flight home just after midnight",acts:["walk","city","boat"],
+  hotel:"No overnight. Flight home just after midnight",meals:"Breakfast",acts:["walk","city","boat"],
   stops:[{k:"h",n:"Clarion Hotel Aviapolis",ll:[60.2938,24.9669]},{k:"s",n:"West Harbour ferry terminal",ll:[60.1535,24.9137],q:"West Harbour Terminal 2 Helsinki"},{k:"s",n:"Tallinn Old Town",ll:[59.4370,24.7453],q:"Tallinn Town Hall Square"},{k:"s",n:"Toompea viewpoints",ll:[59.4377,24.7375],q:"Kohtuotsa viewing platform"},{k:"a",n:"Helsinki Airport (HEL)",ll:[60.3172,24.9633],q:"Helsinki Airport"}],
   routes:[{t:"road",pts:[[60.2938,24.9669],[60.2,24.93],[60.1535,24.9137]]},{t:"ferry",pts:[[60.1535,24.9137],[60.0,24.85],[59.75,24.8],[59.45,24.77]]},{t:"road",pts:[[60.1535,24.9137],[60.22,24.95],[60.3172,24.9633]]}],
   plan:[["12:00","Hotel checkout (breakfast included)"],["Day","Optional Tallinn excursion: ferry about 2 h each way"],["~21:30","Be at Helsinki Airport for AY131 (departs 00:05 on 3 Dec)"]],
@@ -385,7 +385,7 @@ const DAYS = [
  {n:13,date:"2026-12-03",title:"Helsinki → Singapore",cc:["FI","SG"],wx:["hel","sin"],map:"world",
   blurb:"AY131 departs Helsinki at 00:05 and lands in Singapore at 18:40. Home sweet home!",
   season:{t:"Helsinki around −5 to +3°C; Singapore warm and humid.",lo:-5,hi:31},
-  hotel:"Home!",acts:["flight"],
+  hotel:"Home!",meals:"On board",acts:["flight"],
   stops:[{k:"a",n:"Helsinki Airport (HEL)",ll:[60.3172,24.9633],q:"Helsinki Airport"},{k:"a",n:"Changi Airport",ll:[1.3615,103.9894],q:"Changi Airport"}],
   routes:[{t:"flight",pts:[[60.3172,24.9633],[1.3615,103.9894]]}],
   plan:[["00:05","AY131 departs Helsinki"],["18:40","Arrive Singapore"]],
@@ -624,6 +624,7 @@ function wearAdvice(s, acts, night){
   if(icy && lvl>=2) X.push("Temperatures around freezing make icy paths likely. Slip-on ice grips (spikes) are worth wearing.");
   if(!night && lvl>=2) X.push("Low sun on snow is bright. Sunglasses help during the short daylight.");
   if(acts.includes("boat")) X.push("Boat trip: a thermal flotation suit is usually provided. Wear base layers under it and bring a buff and goggles for spray.");
+  if(acts.includes("snowmobile")) X.push("Snowmobile: a thermal overall, boots and helmet are usually provided. Wear thermals underneath, and bring a balaclava and mittens: wind chill at speed is harsh.");
   if(acts.includes("husky")) X.push("Husky ride: ski goggles or sunglasses and a face buff for flying snow. Overalls are often provided.");
   if(acts.includes("sleigh")) X.push("Sleigh ride: you sit still for a long time, so wear your warmest socks and a second pair of gloves.");
   if(acts.includes("flight")) X.push("Flight day: easy layers you can take off. The cabin is warm, and the airport doors are not.");
@@ -678,6 +679,7 @@ function dayView(day){
     <div class="chips"><span class="tag ${i===t?"gold":""}">${rel}</span>${day.hunt?`<span class="tag aur">${icon("aurora","")} Aurora hunt #${day.hunt}</span>`:""}</div>
     <div class="facts">
       <div class="fact"><div class="k">Sleep</div><div class="v">${esc(day.hotel)}</div></div>
+      <div class="fact"><div class="k">Meals included</div><div class="v">${esc(day.meals)}</div></div>
       <div class="fact"><div class="k">Money</div><div class="v">${cur}</div></div>
       <div class="fact"><div class="k">Time zone</div><div class="v">${tzs}</div></div>
     </div>
@@ -912,6 +914,9 @@ function kitView(){
       <dt>Tap water</dt><dd>Excellent everywhere. Refill your bottle.</dd>
       <dt>Tipping</dt><dd>Not expected. Rounding up for great service is a nice touch.</dd>
       <dt>Sauna</dt><dd>Shower first, sit on a towel, and try a cold plunge or snow roll if you're brave. Finland has over 3 million saunas.</dd>
+      <dt>Hotels</dt><dd>All hotels and the day order can still change, depending on glass-igloo availability, flight schedules and weather.</dd>
+      <dt>Longer aurora hunt</dt><dd>The group can hire a bus for a longer aurora hunt if everyone agrees. Confirm at least 3 days ahead; the cost is shared equally.</dd>
+      <dt>Weather swaps</dt><dd>No snowmobiling means an extra group meal; a husky sledge ride may become a cart ride. No refunds for the horse sleigh, reindeer farm or Arctic train.</dd>
       <dt>Cold rules</dt><dd>No cotton next to skin. Don't touch metal with bare hands below −10°C. Keep drinking water: cold air is very dry.</dd>
     </dl></section>`;
 }
